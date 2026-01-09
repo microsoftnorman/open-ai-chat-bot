@@ -9,11 +9,11 @@ This is a Retrieval-Augmented Generation (RAG) implementation that integrates **
 - **Logic App**: Shuttles messages between Teams chat and Azure Functions
 - **Azure Function**: Python-based serverless function that reads from CosmosDB, creates prompts, and calls Azure OpenAI
 - **CosmosDB**: Stores facts/data used to augment chat requests
-- **Azure OpenAI**: Hosted LLM (GPT-3.5) for processing enhanced requests and generating responses
+- **Azure OpenAI**: Hosted LLM service for processing enhanced requests and generating responses (configurable model, typically GPT-3.5 or GPT-4)
 
 ## Technology Stack
 
-- **Language**: Python 3.10/3.11
+- **Language**: Python 3.11 or 3.10
 - **Cloud Platform**: Microsoft Azure
 - **Key Services**: Azure Functions, CosmosDB, Azure OpenAI, Logic Apps
 - **Dependencies**: 
@@ -80,7 +80,7 @@ This is a Retrieval-Augmented Generation (RAG) implementation that integrates **
 This project follows the Retrieval-Augmented Generation pattern:
 1. **Data Collection**: Facts stored in CosmosDB (`data/cosmosdb-facts.txt`)
 2. **User Query**: Question received via Teams channel
-3. **Data Retrieval**: Azure Function reads all facts from CosmosDB
+3. **Data Retrieval**: Azure Function reads all facts from CosmosDB (note: for large datasets, consider implementing selective retrieval or pagination)
 4. **Prompt Enhancement**: Facts are prepended to user question as system context
 5. **LLM Processing**: Azure OpenAI generates response based on augmented prompt
 6. **Response Delivery**: Answer returned to Teams via Logic App
